@@ -19,7 +19,7 @@ namespace Restaurant_Menus.Controllers
 
         public HomeController(IConfiguration configuration)
         {
-            sMenuRepository = new MenuRepository(configuration);                                       
+            sMenuRepository = new MenuRepository(configuration);
             var menus = sMenuRepository.FindAll();
         }
 
@@ -35,9 +35,9 @@ namespace Restaurant_Menus.Controllers
             int create_file_id = cust.File_Id;
             sMenuRepository.Add(cust);
 
-            var menus = sMenuRepository.FindAll();           
+            var menus = sMenuRepository.FindAll();
 
-            IndexViewModel ivm = new IndexViewModel {Menus = menus };
+            IndexViewModel ivm = new IndexViewModel { Menus = menus };
 
             ivm.Menus = menus.Where(p => p.File_Id == create_file_id);
             return PartialView("_Table", ivm);
@@ -66,7 +66,7 @@ namespace Restaurant_Menus.Controllers
             {
                 int cur_file_update = obj.File_Id;
                 sMenuRepository.Update(obj);
-                var menus = sMenuRepository.FindAll();                
+                var menus = sMenuRepository.FindAll();
 
                 IndexViewModel ivm = new IndexViewModel { Menus = menus };
 
@@ -85,7 +85,7 @@ namespace Restaurant_Menus.Controllers
             int tmp_id = file_id.File_Id;
 
             sMenuRepository.Remove(id.Value);
-            var menus = sMenuRepository.FindAll();           
+            var menus = sMenuRepository.FindAll();
 
             IndexViewModel ivm = new IndexViewModel { Menus = menus };
 
@@ -103,9 +103,9 @@ namespace Restaurant_Menus.Controllers
         {
             var menus = sMenuRepository.FindAll();
             int file_id = fileID.Value;
-           
+
             ViewData["file_id_next"] = file_id + 1;
-            
+
             IndexViewModel ivm = new IndexViewModel { Menus = menus };
 
             // если передан id компании, фильтруем список
