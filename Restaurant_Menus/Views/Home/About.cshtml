@@ -1,63 +1,62 @@
 ﻿@using Restaurant_Menus.ViewModels
 @using Restaurant_Menus.Models
+
 @model IndexViewModel
-@{
-    ViewData["Title"] = "Home Page";
+@{   
+    ViewData["Title"] = "Menu Sample";
 }
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
-<div class="modal-body">
-    <div id="demo" style="margin-top: 40px;">
+    <link href="~/css/pdfView.css" rel="stylesheet" />
+    <script src="~/js/incrementing.js"></script>
+    <script src="~/js/openPDF.js"></script>
+</head>
 
-        <br />
-        @Html.ActionLink("Create", "ViewCreate", "Home", null, new { @class = "modal-link btn btn-success" })
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    Dish
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Veg_Comment
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Category
-                </th>
-                <th>
-                    File_ID
-                </th>
-                <th>
-                    Edition column
-                </th>
-            </tr>
-            @foreach (Menu p in Model.Menus)
-            {
-                <tr>
-                    <td>@p.Dish</td>
-                    <td>@p.Description</td>
-                    <td>@p.Veg_Comment</td>
-                    <td>@p.Price</td>
-                    <td>@p.Category</td>
-                    <td>@p.File_Id</td>
-                    <td>
-                        @Html.ActionLink("Edit", "ViewEdit/" + @p.Id, "Home", null, new { @class = "modal-link btn btn-success" })
+<body>
 
-                        <div class="btn btn-warning">
-                            <form asp-action="Delete" asp-route-id="@p.Id" onclick="return confirm('Are sure wants to delete?')" data-ajax="true" data-ajax-update="#divPartial">
-                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block" onlick="return confirm('Are you sure want to delete')">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </table>
+    <div id="searchtext">
+        <div class="split left">
+            @Html.Partial("_PDF")
+        </div>
+
+        <div class="split right">
+            <div id="controlPanel">
+                <form class="form-inline">
+                    <div>
+                        <label for="name">File_ID: </label>
+                        <input type="text" name="fileID" id="french-hens" value="@ViewData["file_id"]">
+                        <div class="dec button">-</div>
+                        <div class="inc button">+</div>
+
+                    </div>
+                    <div calss="pdfButton">
+                        <input type="submit" value="Submit" id="submitButton" style="margin-top: 10px; margin-left: -60px;">
+                    </div>
+                </form>
+            </div>
+
+            <div id="divPartial">
+                <partial name="_Table" model="Model" />
+                <script type="text/javascript">
+                    $(function () {
+                        $('#approve-btn').click(function () {
+                            $('#modal-container').modal('hide');
+                        });
+                    });
+                </script>
+            </div>
+
+
+        </div>
     </div>
-</div>
+</body>
+
+</html>

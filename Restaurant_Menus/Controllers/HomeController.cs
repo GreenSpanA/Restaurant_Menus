@@ -71,9 +71,7 @@ namespace Restaurant_Menus.Controllers
                 IndexViewModel ivm = new IndexViewModel { Menus = menus };
 
                 ivm.Menus = menus.Where(p => p.File_Id == cur_file_update);
-
                 return PartialView("_Table", ivm);
-
             }
 
             return View(obj);
@@ -114,8 +112,10 @@ namespace Restaurant_Menus.Controllers
             ViewData["file_id"] = 1;
             ViewData["file_name"] = "PDF/2.pdf";
 
+
+
             if (fileID != null && fileID > 0)
-            {               
+            {
                 ViewData["file_id"] = fileID.Value;
                 ViewData["file_name"] = "PDF/" + fileID.Value.ToString() + ".pdf";
                 ivm.Menus = menus.Where(p => p.File_Id == fileID);
