@@ -1,7 +1,63 @@
-﻿@{
-    ViewData["Title"] = "About";
+﻿@using Restaurant_Menus.ViewModels
+@using Restaurant_Menus.Models
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+
+<div class="modal-body">
+    <div id="demo" style="margin-top: 40px;">
+
+        <br />
+        @Html.ActionLink("Create", "ViewCreate", "Home", null, new { @class = "modal-link btn btn-success" })
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    Dish
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Veg_Comment
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    File_ID
+                </th>
+                <th>
+                    Edition column
+                </th>
+            </tr>
+            @foreach (Menu p in Model.Menus)
+            {
+                <tr>
+                    <td>@p.Dish</td>
+                    <td>@p.Description</td>
+                    <td>@p.Veg_Comment</td>
+                    <td>@p.Price</td>
+                    <td>@p.Category</td>
+                    <td>@p.File_Id</td>
+                    <td>
+                        @Html.ActionLink("Edit", "ViewEdit/" + @p.Id, "Home", null, new { @class = "modal-link btn btn-success" })
+
+                        <div class="btn btn-warning">
+                            <form asp-action="Delete" asp-route-id="@p.Id" onclick="return confirm('Are sure wants to delete?')" data-ajax="true" data-ajax-update="#divPartial">
+                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block" onlick="return confirm('Are you sure want to delete')">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
