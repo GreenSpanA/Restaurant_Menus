@@ -99,6 +99,11 @@ namespace Restaurant_Menus.Controllers
             return View();
         }
 
+        public IActionResult withoutAuthorization()
+        {
+            return View();
+        }
+
         public IActionResult About(int? fileID = 2)
         {
             var menus = sMenuRepository.FindAll();
@@ -120,7 +125,12 @@ namespace Restaurant_Menus.Controllers
                 ViewData["file_name"] = "PDF/" + fileID.Value.ToString() + ".pdf";
                 ivm.Menus = menus.Where(p => p.File_Id == fileID);
             }
-            return View(ivm);
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(ivm);
+            }
+            return View("withoutAuthorization");
         }
 
         public IActionResult Contact()
