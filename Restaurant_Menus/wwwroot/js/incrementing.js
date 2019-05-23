@@ -8,6 +8,7 @@ $(function () {
         var oldValue = $button.parent().find("input").val();
 
         if ($button.text() == "+") {
+          
             var newVal = parseFloat(oldValue) + 1;
 
         } else {
@@ -18,7 +19,17 @@ $(function () {
                 newVal = 0;
             }
         }
-        $button.parent().find("input").val(newVal);
+        var cur_name = document.getElementById('cur_name').value;
+
+        if (cur_name == "vladimir.davidko@phystech.edu")
+        {            
+
+            if (newVal > 5) {
+                newVal = 5
+            }
+        }  
+        
+        $button.parent().find("input").val(newVal);               
         document.getElementById('pdf_view').data = "PDF/" + newVal.toString() + ".pdf"
 
     });

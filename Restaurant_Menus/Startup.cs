@@ -37,6 +37,8 @@ namespace Restaurant_Menus
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+          //  services.AddIdentity<IdentityUser, IdentityRole>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
